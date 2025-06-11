@@ -29,10 +29,16 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<Student> createStudent(@Valid @RequestBody Student student) {
+    public ResponseEntity<Student> createStudent(@Valid @RequestBody StudentDTO dto) {
+        Student student = new Student();
+        student.setName(dto.getName());
+        student.setGrade(dto.getGrade());
+        student.setScore(dto.getScore());
+
         Student saved = repository.save(student);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
