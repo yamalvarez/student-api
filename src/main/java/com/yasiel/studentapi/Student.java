@@ -1,15 +1,24 @@
 package com.yasiel.studentapi;
 
 import jakarta.persistence.*;
-
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Max;
 @Entity
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Name is required")
     private String name;
+
+    @Min(value = 1, message = "Grade must be at least 1")
+    @Max(value = 12, message = "Grade must be at most 12")
     private int grade;
+
+    @Min(value = 0, message = "Score must be at least 0")
+    @Max(value = 100, message = "Score must be at most 100")
     private double score;
 
     // Constructors
